@@ -25,7 +25,7 @@ public class AppConfig {
 
 		http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-						authorize -> authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
+						authorize -> authorize.requestMatchers("/api/**").permitAll())
 				.addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf(csrf -> csrf.disable())
 				.cors(cors -> cors.configurationSource(new CorsConfigurationSource() {
 					@Override
@@ -34,11 +34,10 @@ public class AppConfig {
 
 						cfg.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
 						cfg.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "*"));
-
-						/*
-						 * cfg.setAllowedMethods(Collections.singletonList("*"));
-						 * cfg.setAllowedHeaders(Collections.singletonList("*"));
-						 */
+						
+//						cfg.setAllowedMethods(Collections.singletonList("*"));
+//						cfg.setAllowedHeaders(Collections.singletonList("*"));
+						 
 						cfg.setExposedHeaders(Arrays.asList("Authorization"));
 						cfg.setMaxAge(3600L);
 
